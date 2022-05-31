@@ -27,7 +27,7 @@ app.post('/api/shorturl', (req, res) => {
 
     shortUrls.push(url)
 
-    res.json({ original_url: url, shorturl: shortUrls.length })
+    res.json({ original_url: url, short_url: shortUrls.length })
   })
 })
 
