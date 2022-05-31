@@ -22,13 +22,12 @@ app.get('/', (req, res) => {
 app.post('/api/shorturl', (req, res) => {
   const { url } = req.body
 
-  dns.lookup(url, (err, address) => {
-    console.log(err)
+  dns.lookup(url, err => {
     if (err) return res.json({ error: "invalid url" })
 
     shortUrls.push(url)
 
-    res.json({ original_url: address, shorturl: shortUrls.length })
+    res.json({ original_url: url, shorturl: shortUrls.length })
   })
 })
 
