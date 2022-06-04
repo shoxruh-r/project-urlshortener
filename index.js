@@ -22,21 +22,18 @@ app.get('/', (req, res) => {
 app.post('/api/shorturl', (req, res) => {
   const { url } = req.body
 
-  try {    
-    if (url.includes('boilerplate-project-urlshortener.shoxruhr.repl.co') || url.includes('example.com')) throw Error()
+  if (url.includes('boilerplate-project-urlshortener.shoxruhr.repl.co') || url.includes('example.com'))
+    res.json({ error: "invalid url" })
 
-    const domain = url.split(/https?:\/\/(www.)?/)
+  const domain = url.split(/https?:\/\/(www.)?/)
 
-    dns.lookup(domain[domain.length - 1], err => {
-      if (err) throw err
+  dns
+    .lookup(domain[domain.length - 1], error => {
+      if (error) return res.json({ error: "invalid url" })
 
       shortUrls.push(url)
-
       res.json({ original_url: url, short_url: shortUrls.length })
     })
-  } catch (e) {
-    res.json({ error: "invalid url" })
-  }
 })
 
 // When you visit /api/shorturl/<short_url>
