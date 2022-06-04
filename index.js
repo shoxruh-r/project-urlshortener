@@ -23,7 +23,7 @@ app.post('/api/shorturl', (req, res) => {
   const { url } = req.body
 
   if (url.includes('boilerplate-project-urlshortener.shoxruhr.repl.co') || url.includes('example.com'))
-    res.json({ error: "invalid url" })
+    return res.json({ error: "invalid url" })
 
   const domain = url.split(/https?:\/\/(www.)?/)
 
