@@ -23,7 +23,7 @@ app.post('/api/shorturl', (req, res) => {
   const { url } = req.body
 
   try {    
-    if (req.headers.host.includes(url)) throw Error()
+    if (url.includes(req.headers.host) || url.includes('example.com')) throw Error()
 
     const domain = url.split(/https?:\/\/(www.)?/)
 
