@@ -20,12 +20,14 @@ app.get('/', (req, res) => {
 
 // You can POST a URL to /api/shorturl and get a JSON response with original_url and short_url properties
 app.post('/api/shorturl', (req, res) => {
-  const { url } = req.body
+  let { url } = req.body
 
-  try {
-    if (!url.startsWith('http')) throw Error()
+  try {    
+    if (req.headers.host.includes(url)) throw Error()
 
-    dns.lookup(url, err => {
+    url = url.split(/https?:\/\/(www.)?/)
+
+    dns.lookup(domain[domain.length - 1], err => {
       if (err) throw err
 
       shortUrls.push(url)
