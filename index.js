@@ -43,7 +43,7 @@ app.post('/api/shorturl', (req, res) => {
 app.get('/api/shorturl/:shorturl', (req, res) => {
   const url = shortUrls[Number(req.params.shorturl) - 1]
 
-  res.redirect('https://' + url)
+  res.redirect(url)
 })
 
 app.listen(port, () => {
